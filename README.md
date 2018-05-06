@@ -16,4 +16,4 @@ And you can run the tests:
 ninja -C builddir tests
 ```
 
-My notes lives in the Markdown document [Basic data structures in C](Basic data structures in C.md), and the exercises lives in a Python notebook [Data_structures_in_C.ipynb](Data_structures_in_C.ipynb). 
+My notes lives in the Markdown document [Basic data structures in C](Basic_data_structures_in_C.md), and the exercises lives in a Python notebook [Data_structures_in_C.ipynb](Data_structures_in_C.ipynb). 

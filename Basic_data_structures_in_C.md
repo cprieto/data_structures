@@ -81,3 +81,36 @@ NodePtr last(NodePtr top) {
 }
 ```
 
+### Removing element at index
+
+This is a little more difficult, what you basically do is finding the index of the element - 1 and the element at that index, we just change the `next` from prev to next.
+
+```c
+#include <stdbool.h>
+
+bool remove_at(NodePtr top, int index) {
+    if (index == 0) 
+    return true;
+}
+```
+
+### Inserting element at index
+
+Similar to remove element at certain index
+
+```c
+bool insert_at(NodePtr top, int index, int value) {
+    if (index < 0) { return false; }
+    
+    NodePtr node = makeNode(value);
+    if (index == 0) {
+        node->next = top;
+        return true;
+    }
+    
+    for (int i = 0; i < value - 1; i++) {
+        
+    }
+}
+```
+
