@@ -8,7 +8,7 @@ NodePtr makeNode(int num) {
   return node;
 }
 
-int count(NodePtr node) {
+int length(NodePtr node) {
   if (node == NULL) { return 0; }
   int count = 1;
   while (node->next != NULL) {
@@ -16,4 +16,20 @@ int count(NodePtr node) {
     count++;
   }
   return count;
+}
+
+NodePtr search(NodePtr node, int num) {
+  while (node != NULL) {
+    if (node->num == num) { return node; }
+    node = node->next;
+  }
+  return NULL;
+}
+
+NodePtr last(NodePtr node) {
+  while (node != NULL) {
+    if (node->next == NULL) return node;
+    node = node->next;
+  }
+  return NULL;
 }

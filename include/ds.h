@@ -7,6 +7,8 @@ typedef struct node {
 } Node, *NodePtr;
 
 NodePtr makeNode(int);
-int count(NodePtr);
+int length(NodePtr);
+NodePtr search(NodePtr, int);
+NodePtr last(NodePtr);
 
 #endif

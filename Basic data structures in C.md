@@ -4,7 +4,7 @@
 
 The idea is simple, we can have a struct containing data and a pointer to the next element if it exists.
 
-![pointer structure](/Users/cprieto/Code/ds/linked01.png)
+![pointer structure](images/linked01.png)
 
 We can declare a simple C structure for this, let's imagine it is designed to hold integers:
 
@@ -41,7 +41,7 @@ node->next->next = makeNode(37);
 To get the total elements in a linked list, it will be matter of just loop through all of them until we reach an element with next is `NULL`
 
 ```c
-int count(NodePtr node) {
+int length(NodePtr node) {
     if (node == NULL) { return 0; }
     int count = 1;
     while (node->next != NULL) {
@@ -57,12 +57,25 @@ int count(NodePtr node) {
 This is a boring one, in the same way as counting it, we loop through it until we find the element.
 
 ```c
-NodePtr top; // This is for the first element in the list
-NodePtr find(int num) {
-    NodePtr node = top;
-    while (node->next != NULL) {
+NodePtr search(NodePtr top, const int num) {
+    NodePtr node = top; // We actually can reuse top
+    while (node != NULL) {
         if (node->num == num) { return node; }
         node = node->next;
+    }
+    return NULL;
+}
+```
+
+### Finding the last element
+
+As the previous operation, this is matter of looping through the structure until there is no next.
+
+```c
+NodePtr last(NodePtr top) {
+    while (top != NULL) {
+        if (top->next == NULL) { return top; }
+        top = top->next;
     }
     return NULL;
 }
