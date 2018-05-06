@@ -33,3 +33,22 @@ NodePtr last(NodePtr node) {
   }
   return NULL;
 }
+
+NodePtr get(NodePtr top, int index) {
+  for (int x = 0; x < index; x++) {
+    if (top == NULL) { return NULL; }
+    top = top->next;
+  }
+  return top;
+}
+
+bool insert(NodePtr top, int value, int index) {
+  NodePtr prev = get(top, index - 1);
+  if (prev == NULL) { return false; }
+
+  NodePtr node = makeNode(value);
+  node->next = prev->next;
+  prev->next = node;
+
+  return true;
+}

@@ -47,3 +47,19 @@ Test(LinkedList, last) {
 
   cr_assert(last(NULL) == NULL);
 }
+
+Test(LinkedList, get) {
+  cr_assert(get(top, 1) != NULL);
+  cr_assert(get(top, 1)->num == 2); 
+
+  cr_assert(get(NULL, 0) == NULL);
+  cr_assert(get(top, 5) == NULL);
+}
+
+Test(LinkedList, insert) {
+  cr_assert(insert(top, 100, 1) == true);
+  cr_assert(top->next->num == 100);
+  cr_assert(top->next->next->num == 2);
+
+  cr_assert(insert(top, 100, 5) == false);
+}
