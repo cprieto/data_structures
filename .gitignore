@@ -1,4 +1,5 @@
 build/
+output/
 builddir/
 .ipynb_checkpoints/
 .vscode/

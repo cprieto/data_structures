@@ -88,29 +88,58 @@ This is a little more difficult, what you basically do is finding the index of t
 ```c
 #include <stdbool.h>
 
-bool remove_at(NodePtr top, int index) {
-    if (index == 0) 
+bool remove_at(NodePtr *top, const int index) {
+    if (index < 0 || top == NULL || *top == NULL) {
+        return false;
+    }
+    
+    NodePtr node = *top;
+    if (index == 0) {
+        *top = node->next;
+    } else {
+        NodePtr prev;
+        for (int n = 0; n < index; n++) {
+            if (node == NULL) { return false; }
+            if (n == index - 1) { prev = node; }
+            
+            node = node->next;
+        }
+        prev->next = node->next;
+    }
+    
+    free(node);
     return true;
 }
 ```
 
+Here, we need to pass a pointer to our top pointer, why? because there is the possibility we will have to change it. The first case is for our guard clauses, when the index is negative or the pointer is NULL we have nothing to do, so we return just `false` to indicate we did nothing.
+
+The first interesting case is when we remove the node at the beginning of the list, in this case _we have to change_ the pointer (hence the usage of a pointer to the pointer). In this case it is easy, we just point the top to the next element, done.
+
+The second case, the _normal_ or more common case, we need to grab not only the element we want to remove, but the element _before_ it, of course, this covers as well the case when the index is beyond the last element of our linked list.
+
 ### Inserting element at index
 
-Similar to remove element at certain index
+Similar to remove element at certain index, we need to find the previous item to the index, so the loop is until `index - 1`.
 
 ```c
-bool insert_at(NodePtr top, int index, int value) {
-    if (index < 0) { return false; }
+bool insert_at(NodePtr *top, const int index, int value) {
+    if (index < 0 || top == NULL || *top == NULL) { return false; }
     
     NodePtr node = makeNode(value);
     if (index == 0) {
-        node->next = top;
-        return true;
+        node->next = *top;
+        *top = node;
+    } else {
+        NodePtr prev = *top;
+    	for (int i = 0; i < index - 1; i++) {
+        	if (prev == NULL) { return false; }
+            prev = prev->next;
+    	}
+        node->next = prev->next;
+        prev->next = node;
     }
-    
-    for (int i = 0; i < value - 1; i++) {
-        
-    }
+    return true;
 }
 ```
 
