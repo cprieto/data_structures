@@ -7,12 +7,12 @@ typedef struct node {
   struct node *next;
 } Node, *NodePtr;
 
-NodePtr lk_makeNode(int);
-int lk_length(NodePtr);
-NodePtr lk_search(NodePtr, int);
-NodePtr lk_last(NodePtr);
-NodePtr lk_get_at(NodePtr, const int);
-bool lk_insert_at(NodePtr*, const int, int);
-bool lk_remove_at(NodePtr*, const int);
+NodePtr ds_make_node(int value);
+int ds_length(NodePtr top);
+NodePtr ds_search(NodePtr top, const int value);
+NodePtr ds_last(NodePtr top);
+NodePtr ds_get_at(NodePtr top, const int index);
+bool ds_insert_at(NodePtr *top, const int index, int value);
+bool ds_remove_at(NodePtr *top, const int index);
 
 #endif

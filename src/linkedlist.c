@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include "ds.h"
 
-NodePtr lk_makeNode(int num) {
+NodePtr ds_make_node(int num) {
   NodePtr node = (Node *)malloc(sizeof(Node));
   node->num = num;
   node->next = NULL;
   return node;
 }
 
-int lk_length(NodePtr node) {
+int ds_length(NodePtr node) {
   if (node == NULL) { return 0; }
   int count = 1;
   while (node->next != NULL) {
@@ -19,7 +19,7 @@ int lk_length(NodePtr node) {
   return count;
 }
 
-NodePtr lk_search(NodePtr node, int num) {
+NodePtr ds_search(NodePtr node, int num) {
   while (node != NULL) {
     if (node->num == num) { return node; }
     node = node->next;
@@ -27,7 +27,7 @@ NodePtr lk_search(NodePtr node, int num) {
   return NULL;
 }
 
-NodePtr lk_last(NodePtr node) {
+NodePtr ds_last(NodePtr node) {
   while (node != NULL) {
     if (node->next == NULL) return node;
     node = node->next;
@@ -35,7 +35,7 @@ NodePtr lk_last(NodePtr node) {
   return NULL;
 }
 
-NodePtr lk_get_at(NodePtr top, const int index) {
+NodePtr ds_get_at(NodePtr top, const int index) {
   for (int x = 0; x < index; x++) {
     if (top == NULL) { return NULL; }
     top = top->next;
@@ -43,10 +43,10 @@ NodePtr lk_get_at(NodePtr top, const int index) {
   return top;
 }
 
-bool lk_insert_at(NodePtr *top, const int index, int value) {
+bool ds_insert_at(NodePtr *top, const int index, int value) {
   if (index < 0 || top == NULL || *top == NULL) { return false; }
     
-  NodePtr node = lk_makeNode(value);
+  NodePtr node = ds_make_node(value);
   if (index == 0) {
     node->next = *top;
     *top = node;
@@ -62,7 +62,7 @@ bool lk_insert_at(NodePtr *top, const int index, int value) {
   return true;
 }
 
-bool lk_remove_at(NodePtr *top, const int index) {
+bool ds_remove_at(NodePtr *top, const int index) {
   if (index < 0 || top == NULL || *top == NULL) {
     return false;
   }
