@@ -4,13 +4,24 @@
 static NodePtr top;
 
 void create_top_list() {
-  top = ds_make_node(1);
-  top->next = ds_make_node(2);
-  top->next->next = ds_make_node(3);
-  top->next->next->next = ds_make_node(4);
+  top = (Node *)malloc(sizeof(Node));
+  top->num = 1;
+  top->next = (Node *)malloc(sizeof(Node));
+  top->next->num = 2;
+  top->next->next = (Node *)malloc(sizeof(Node));
+  top->next->next->num = 3;
+  top->next->next->next = (Node *)malloc(sizeof(Node));
+  top->next->next->next->num = 4;
+  top->next->next->next->next = NULL;
 }
 
 void tear_down() {
+  NodePtr node = top;
+  while(node != NULL) {
+    NodePtr to_free = node;
+    node = node->next;
+    free(to_free);
+  }
   top = NULL;
 }
 
