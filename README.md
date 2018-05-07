@@ -17,3 +17,18 @@ ninja -C builddir tests
 ```
 
 My notes lives in the Markdown document [Basic data structures in C](Basic_data_structures_in_C.md), and the exercises lives in a Python notebook [Data_structures_in_C.ipynb](Data_structures_in_C.ipynb). 
+
+### Using make
+
+I included a simple makefile, to build the project:
+
+```
+make all
+```
+
+This won't build or run the tests, for that run:
+
+```
+make test
+```
+
