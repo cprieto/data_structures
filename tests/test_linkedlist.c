@@ -136,4 +136,7 @@ Test(LinkedList, sorted_insert) {
 Test(LinkedList, reverse) {
   cr_assert(ds_reverse(NULL) == NULL);
   cr_assert(ds_reverse(top) != NULL);
+
+  cr_assert(ds_reverse(top)->num == 4);
+  cr_assert(ds_reverse(top)->next->num == 3);
 }
