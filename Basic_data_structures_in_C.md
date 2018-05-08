@@ -20,7 +20,7 @@ Because C doesn't have constructors for structs, we can create a helper function
 ```c
 #include <stdlib.h>
 
-NodePtr makeNode(int num) {
+NodePtr make_node(int num) {
     NodePtr node = (Node *)malloc(sizeof(Node));
     node->num = num;
     node->next = NULL;
@@ -126,7 +126,7 @@ Similar to remove element at certain index, we need to find the previous item to
 bool insert_at(NodePtr *top, const int index, int value) {
     if (index < 0 || top == NULL || *top == NULL) { return false; }
     
-    NodePtr node = makeNode(value);
+    NodePtr node = make_node(value);
     if (index == 0) {
         node->next = *top;
         *top = node;
@@ -142,4 +142,30 @@ bool insert_at(NodePtr *top, const int index, int value) {
     return true;
 }
 ```
+
+### Sorted insert
+
+We can create a method to not just insert new elements into a linked list, but insert the elements in a sorted manner, this is matter of comparing the value with the current value in the node and move forward until the next value is greater than the value to insert.
+
+```c
+bool sorted_insert(NodePtr *top, int value) {
+    if (top == NULL) { return false; }
+    
+    NodePtr prev = NULL;
+    NodePtr current = *top;
+    NodePtr node = make_node(value);
+    
+    while(current != NULL && current->num < value) {
+        prev = current;
+        current = current->next;
+    }
+    
+    if (prev != NULL) { prev->next = node; }
+    else { *top = node; }
+    
+    return true;
+}
+```
+
+The insert process is a little complicated, it requires three pointers, one with the value, another with the previous and what is the current value. We just compare if the current value is greater than the value we want to insert, if not, we found the point of insertion. We need to be careful and check if we _have_ a previous value, if not, it means we have to insert at the beginning of the list. This insertion process was englightening for me, it would be very useful to keep ordered search elements (I needed something like that for an in-memory row index).
 

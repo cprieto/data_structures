@@ -84,3 +84,24 @@ bool ds_remove_at(NodePtr *top, const int index) {
   free(node);
   return true;
 }
+
+bool ds_sorted_insert(NodePtr *top, int value) {
+  if (top == NULL) { return false; }
+
+  NodePtr node = ds_make_node(value);
+  NodePtr prev = NULL;
+  NodePtr current = *top;
+  while (current != NULL && current->num < value) {
+    prev = current;
+    current = current->next;
+  }
+  node->next = current;
+
+  if (prev != NULL) { 
+    prev->next = node; 
+  } else {
+    *top = node;
+  }
+
+  return true;
+}

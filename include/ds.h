@@ -15,4 +15,6 @@ NodePtr ds_get_at(NodePtr top, const int index);
 bool ds_insert_at(NodePtr *top, const int index, int value);
 bool ds_remove_at(NodePtr *top, const int index);
 
+bool ds_sorted_insert(NodePtr *top, int index);
+
 #endif

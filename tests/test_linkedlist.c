@@ -15,14 +15,18 @@ void create_top_list() {
   top->next->next->next->next = NULL;
 }
 
-void tear_down() {
-  NodePtr node = top;
+void clean_all(NodePtr *top) {
+  NodePtr node = *top;
   while(node != NULL) {
     NodePtr to_free = node;
     node = node->next;
     free(to_free);
   }
-  top = NULL;
+  *top = NULL; 
+}
+
+void tear_down() {
+  clean_all(&top);
 }
 
 TestSuite(LinkedList, .init = create_top_list, .fini = tear_down);
@@ -106,4 +110,25 @@ Test(LinkedList, remove) {
   cr_assert(ds_remove_at(&top, 0) == true);
   cr_assert(top->next == NULL);
   cr_assert(top->num == 3);
+}
+
+Test(LinkedList, sorted_insert) {
+  cr_assert(ds_sorted_insert(NULL, 64) == false);
+
+  NodePtr top = NULL;
+  cr_assert(ds_sorted_insert(&top, 64) == true);
+  cr_assert(top != NULL);
+  cr_assert(top->num == 64);
+
+  cr_assert(ds_sorted_insert(&top, 56) == true);
+  cr_assert(top->num == 56);
+  cr_assert(top->next != NULL);
+  cr_assert(top->next->num == 64);
+
+  cr_assert(ds_sorted_insert(&top, 100) == true);
+  cr_assert(top->next->next != NULL);
+  cr_assert(top->next->next->num == 100);
+  cr_assert(top->next->next->next == NULL); 
+
+  clean_all(&top);
 }
