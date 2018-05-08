@@ -169,3 +169,24 @@ bool sorted_insert(NodePtr *top, int value) {
 
 The insert process is a little complicated, it requires three pointers, one with the value, another with the previous and what is the current value. We just compare if the current value is greater than the value we want to insert, if not, we found the point of insertion. We need to be careful and check if we _have_ a previous value, if not, it means we have to insert at the beginning of the list. This insertion process was englightening for me, it would be very useful to keep ordered search elements (I needed something like that for an in-memory row index).
 
+### Reverse
+
+The reverse operation took me a little more mostly because the assignation operation in the loop is _weird_
+
+```c
+NodePtr reverse(NodePtr top) {
+  if (top == NULL) { return NULL; }
+  
+  NodePtr result, current = NULL;
+  
+  while (top != NULL) {
+    current = ds_make_node(top->num);
+    current->next = result;
+    result = current;
+    top = top->next;
+  }
+
+  return result;
+}
+```
+

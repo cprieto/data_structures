@@ -3,3 +3,7 @@ output/
 builddir/
 .ipynb_checkpoints/
 .vscode/
+.idea/
+
+# CMake is giving me headaches
+CMakeLists.txt

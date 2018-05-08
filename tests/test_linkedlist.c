@@ -132,3 +132,8 @@ Test(LinkedList, sorted_insert) {
 
   clean_all(&top);
 }
+
+Test(LinkedList, reverse) {
+  cr_assert(ds_reverse(NULL) == NULL);
+  cr_assert(ds_reverse(top) != NULL);
+}

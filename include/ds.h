@@ -17,4 +17,6 @@ bool ds_remove_at(NodePtr *top, const int index);
 
 bool ds_sorted_insert(NodePtr *top, int index);
 
+NodePtr ds_reverse(NodePtr top);
+
 #endif

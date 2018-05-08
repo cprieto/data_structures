@@ -1,17 +1,20 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "ds.h"
 
 NodePtr ds_make_node(int num) {
   NodePtr node = (Node *)malloc(sizeof(Node));
+
   node->num = num;
   node->next = NULL;
+
   return node;
 }
 
 int ds_length(NodePtr node) {
   if (node == NULL) { return 0; }
+  
   int count = 1;
+
   while (node->next != NULL) {
     node = node->next;
     count++;
@@ -68,10 +71,12 @@ bool ds_remove_at(NodePtr *top, const int index) {
   }
   
   NodePtr node = *top;
+
   if (index == 0) {
     *top = node->next;
   } else {
-    NodePtr prev;
+    NodePtr prev = *top;
+
     for (int n = 0; n < index; n++) {
       if (node == NULL) { return false; }
       if (n == index - 1) { prev = node; }
@@ -88,9 +93,10 @@ bool ds_remove_at(NodePtr *top, const int index) {
 bool ds_sorted_insert(NodePtr *top, int value) {
   if (top == NULL) { return false; }
 
-  NodePtr node = ds_make_node(value);
   NodePtr prev = NULL;
   NodePtr current = *top;
+  NodePtr node = ds_make_node(value);
+
   while (current != NULL && current->num < value) {
     prev = current;
     current = current->next;
@@ -104,4 +110,19 @@ bool ds_sorted_insert(NodePtr *top, int value) {
   }
 
   return true;
+}
+
+NodePtr ds_reverse(NodePtr top) {
+  if (top == NULL) { return NULL; }
+  
+  NodePtr result, current = NULL;
+  
+  while (top != NULL) {
+    current = ds_make_node(top->num);
+    current->next = result;
+    result = current;
+    top = top->next;
+  }
+
+  return result;
 }
