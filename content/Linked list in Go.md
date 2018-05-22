@@ -4,7 +4,7 @@ In simple terms a _linked list_ is a linear collection of _elements_. A linked l
 
 An element in a linked list is called _a node_, every node contains a _space_ for _data_ and it always points to its _next_ element.
 
-![linked01](/Users/cprieto/Code/ds/content/images/linked01.png)
+![linked01](images/linked01.png)
 
 If we are in the _last node_ in the list, the next element is `NULL`.
 
@@ -61,19 +61,19 @@ We will discuss each of them with more detail and propose our solution to the op
 
 Keeping a link to the _last_ node in the list make appending an element at the end of the list an easy operation, for example, let's assume we already have a list with three nodes, as noted, start and end will point to the first and last node:
 
-![Figure 2 - tail and top elements](/Users/cprieto/Code/ds/content/images/linked02.png)
+![Figure 2 - tail and top elements](images/linked02.png)
 
 Adding a new node will involve, creating a new node:
 
-![linked03](/Users/cprieto/Code/ds/content/images/linked03.png)
+![linked03](images/linked03.png)
 
 Now we point the _current_ last node _next_ to the new node:
 
-![linked04](/Users/cprieto/Code/ds/content/images/linked04.png)
+![linked04](images/linked04.png)
 
 Finally now _tail_ should point to the new node:
 
-![linked05](/Users/cprieto/Code/ds/content/images/linked05.png)
+![linked05](images/linked05.png)
 
 Before going into the code, we should take a few observations and checks to do when adding a new node _at the end_ of our list:
 
@@ -99,25 +99,25 @@ func (l *List) Append(value int) {
 
 Very similar to the `append` operation, the _next_ node for the new element is the _head_ node in theh list:
 
-![linked06](/Users/cprieto/Code/ds/content/images/linked06.png)
+![linked06](images/linked06.png)
 
 And finally we change the _head_ pointer in the list
 
-![linked07](/Users/cprieto/Code/ds/content/images/linked07.png)
+![linked07](images/linked07.png)
 
 ### Inserting an element in the middle
 
 This is a little more complicated operation, we need to find the node in the index _before_ the index we want to insert into.
 
-![linked08](/Users/cprieto/Code/ds/content/images/linked08.png)
+![linked08](images/linked08.png)
 
 In this case we have to loop until we get to the $\text{index} - 1$, once there, we point the next pointer of the new node to the next element of the previous index
 
-![linked09](/Users/cprieto/Code/ds/content/images/linked09.png)
+![linked09](images/linked09.png)
 
 Now, it is just matter of update the next pointer for the $(\text{index} - 1)$ node and it will be done
 
-![linked10](/Users/cprieto/Code/ds/content/images/linked10.png)
+![linked10](images/linked10.png)
 
 We can create a single function to handle the "at the beginning" and "in the middle" insert operation with the following observations:
 
@@ -181,25 +181,25 @@ func (l *List) GetAt(index int) (int, bool) {
 
 Removing an element is very similar to the `InsertAt` operation, we start from the _head_ and loop until we get to the desired $\text{index} - 1$ to remove, this is the _previous node_
 
-![linked11](/Users/cprieto/Code/ds/content/images/linked11.png)
+![linked11](images/linked11.png)
 
 We now point the _next_ pointer from the _previous element_ to the _next_ pointer from the element to remove
 
-![linked12](/Users/cprieto/Code/ds/content/images/linked12.png)
+![linked12](images/linked12.png)
 
 finally we just remove the link from the element to remove and the _garbage collector_ in the Go runtime will take care of it.
 
-![linked13](/Users/cprieto/Code/ds/content/images/linked13.png)
+![linked13](images/linked13.png)
 
 We need to take care into consideration two important cases:
 
 Removing a node from the _beginning_ of the list ($\text{index} = 0$) is matter of moving the `head` pointer
 
-![linked15](/Users/cprieto/Code/ds/content/images/linked15.png)
+![linked15](images/linked15.png)
 
 Removing a node from the _end_ of the list ($\text{index} = \text{lenght} - 1$), it is then matter of moving the _tail_ pointer to the _previous_ node and setting the _previous_ next pointer to `nil`.
 
-![linked16](/Users/cprieto/Code/ds/content/images/linked16.png)
+![linked16](images/linked16.png)
 
 In code this looks something like this:
 
