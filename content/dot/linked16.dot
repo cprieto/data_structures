@@ -1,0 +1,40 @@
+digraph {
+    rankdir=LR;
+    node[shape=record];
+
+    subgraph cluster_p1 {
+        label=0;
+        labelloc=b;
+        pencolor=transparent;
+        p1[label="{<data> 1|<next>}"];
+    }
+    subgraph cluster_p2 {
+        label=1;
+        labelloc=b;
+        pencolor=transparent;
+        p2[label="{<data> 2|<next>}"];
+    }
+    subgraph cluster_p3 {
+        label=2;
+        labelloc=b;
+        pencolor=transparent;
+        p3[label="{<data> 3|<next>}"];
+    }
+    subgraph cluster_p4 {
+        label=3;
+        labelloc=b;
+        style=dashed;
+        p4[label="{<data> 4|<next>}",color=gray];
+    }
+
+    edge[arrowtail=dot,tailclip=false,dir=both, arrowsize=1.2];
+    p1:next:c -> p2:data;
+    p2:next:c -> p3:data;
+    p3:next:c -> p4:data[arrowtail=odot,arrowhead=empty,color=gray];
+
+    node[shape=plaintext];
+    edge[arrowtail=none,tailclip=true];
+    
+    tail -> p3[constraint=false];
+    head -> p1;
+}

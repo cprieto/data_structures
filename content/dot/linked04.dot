@@ -1,0 +1,19 @@
+digraph {
+    rankdir=LR;
+    node[shape=record];
+
+    p1[label="{<data> 1|<next>}"];
+    p2[label="{<data> 2|<next>}"];
+    p3[label="{<data> 3|<next>}"];
+    p4[label="{<data> 4|<next>}"];
+
+    edge[arrowtail=dot,tailclip=false,dir=both, arrowsize=1.2];
+    p1:next:c -> p2:data;
+    p2:next:c -> p3:data;
+    p3:next:c -> p4:data;
+
+    node[shape=plaintext];
+    edge[arrowtail=none,tailclip=true];
+    head -> p1;
+    tail -> p3[constraint=false];
+}
