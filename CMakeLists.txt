@@ -21,3 +21,11 @@ list(APPEND TESTS
 add_executable(tests ${TESTS})
 
 target_link_libraries(tests PRIVATE ds Catch2::Catch2)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
+
+# Run all the tests with ctest after every build
+add_custom_command(TARGET tests
+        POST_BUILD COMMAND ctest -C $<CONFIGURATION> --output-on-failure)
