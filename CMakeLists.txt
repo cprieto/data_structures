@@ -1,17 +1,18 @@
 cmake_minimum_required(VERSION 3.20)
-project(algo)
+project(data_structures)
+
+# With LLVM this is required for Catch2!
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 find_package(Catch2 REQUIRED)
 
-list(APPEND SOURCES
+list(APPEND SOURCE
         src/stuff.c)
 
-# This line is required for the compiler
-# if not, it won't link the C files
-set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
-
-add_library(algo OBJECT ${SOURCES})
+add_library(ds OBJECT ${SOURCE})
+set_property(TARGET ds PROPERTY C_STANDARD 11)
 
 list(APPEND TESTS
         src/test_main.cpp
@@ -19,4 +20,4 @@ list(APPEND TESTS
 
 add_executable(tests ${TESTS})
 
-target_link_libraries(tests PRIVATE algo Catch2::Catch2)
+target_link_libraries(tests PRIVATE ds Catch2::Catch2)
