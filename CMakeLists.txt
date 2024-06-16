@@ -12,13 +12,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-
 add_subdirectory(dictionaries)
 
 add_library(data_structures OBJECT)
 add_subdirectory(trees)
 
+target_link_libraries(data_structures PRIVATE Catch2::Catch2)
+
 ## tests
-add_executable(all_tests all_tests.cpp
-        trees/btree_tests.cpp)
+add_executable(all_tests all_tests.cpp)
 target_link_libraries(all_tests PRIVATE Catch2::Catch2WithMain data_structures)
