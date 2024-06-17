@@ -25,6 +25,34 @@ class bstree {
         right->in_order(action);
       }
     }
+
+    bool contains(T what) const {
+        if (what == value) {
+            return true;
+        } else if (left && what < value) {
+            return left->contains(what);
+        } else if (right && what > value) {
+            return right->contains(what);
+        }
+
+        return false;
+    }
+
+    node* min() {
+        if (left) {
+            return left->min();
+        } else {
+            return this;
+        }
+    }
+
+    node* max() {
+        if (right) {
+            return right->max();
+        } else {
+            return this;
+        }
+    }
   };
 
   node* root;
@@ -54,10 +82,32 @@ class bstree {
 
   void insert(T value) { insert_node(root, value); }
 
-  void foreach_in_order(std::function<void(T)> action) {
+  void foreach_in_order(std::function<void(T)> action) const {
     if (root == nullptr)
       return;
 
     root->in_order(action);
+  }
+
+  [[nodiscard]] bool contains(T value) const {
+      return root != nullptr && root->contains(value);
+  }
+
+  std::optional<T> min() const {
+      if (!root) {
+          return std::nullopt;
+      }
+
+      auto n = root->min();
+      return n->value;
+  }
+
+  std::optional<T> max() const {
+      if (!root) {
+          return std::nullopt;
+      }
+
+      auto result = root->max();
+      return result->value;
   }
 };
